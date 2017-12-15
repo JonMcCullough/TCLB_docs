@@ -1,55 +1,66 @@
 
 
 ## Description
-d2q9_SRT
+The `d2q9` model is a basic 2D Lattice Boltzmann Method model for flow simulation.  It is a implementation of a simple Multiple-Relaxation-Time collision operator.  The model has one [option](/basics/options/): BC. This option turns on custom fields for setting non-standard profiles on inlets and other things.
 
 ## Details
 [Model description files](Model description) files for this model:
-[Dynamics.c](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d2q9_SRT/Dynamics.c.Rt)
-[Dynamics.R](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d2q9_SRT/Dynamics.R)
+[Dynamics.c](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d2q9_autosym/Dynamics.c.Rt)
+[Dynamics.R](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d2q9_autosym/Dynamics.R)
 
 ### [Zonal Settings](Settings)
 
 | Name | Comment |
 | --- | --- |
-|`Velocity`|inlet/outlet/init velocity|
-|`Velocity_x`|inlet/outlet/init velocity in x|
-|`Velocity_y`|inlet/outlet/init velocity in y|
-|`GravitationX`|body/external acceleration|
-|`GravitationY`|body/external acceleration|
+|`VelocityX`|inlet/outlet/init velocity|
+|`VelocityY`|inlet/outlet/init velocity|
+|`Pressure`|inlet/outlet/init density|
+|`PressureLossInObj`|Weight of [pressure loss] in objective|
+|`OutletFluxInObj`|Weight of [pressure loss] in objective|
+|`InletFluxInObj`|Weight of [pressure loss] in objective|
 
 
 ### [Global Settings](Settings)
 
 | Name | Derived | Comment |
 | --- | --- | --- |
-|`omega`|1.0/(3*nu+0.5)|inverse of relaxation time|
-|`nu`||viscosity|
-|`Density`||Density|
+|`RelaxationRate`|1.0/(3*Viscosity + 0.5)|one over relaxation time|
+|`Viscosity`||viscosity|
+|`GravitationX`||GravitationX|
+|`GravitationY`||GravitationY|
+|`S2`|1-RelaxationRate|MRT Sx|
+|`S3`||MRT Sx|
+|`S4`||MRT Sx|
 |`Threshold`||Parameters threshold|
 
 ### [Exported Quantities](Quantities) (VTK, etc)
 
 | Name | [Unit](Units) | Comment |
 | --- | --- | --- |
-|`U`|`m/s`|U|
 |`Rho`|`kg/m3`|Rho|
+|`U`|`m/s`|U|
 
 #### [Exported Global Integrals](Globals) (CSV, etc)
 
 | Name | [Unit](Units) | Comment |
 | --- | --- | --- |
+|`PressureLoss`|`1mPa`|pressure loss|
+|`OutletFlux`|`1m2/s`|pressure loss|
+|`InletFlux`|`1m2/s`|pressure loss|
 |`Objective`|`1`|Objective function|
 
 ### [Node Types](Node-Types)
 
 | Group | Types |
 | --- | --- |
-|BOUNDARY|Wall, Solid, WVelocity, WPressure, WPressureL, EPressure, EVelocity|
+|BOUNDARY|Wall, Solid, WVelocity, WPressure, WPressureL, EPressure, EVelocity, NVelocity, SVelocity, NSymmetry, SSymmetry|
 |COLLISION|BGK, MRT|
 |DESIGNSPACE|DesignSpace|
 |NONE|None|
+|OBJECTIVE|Inlet, Outlet|
 |SETTINGZONE|DefaultZone|
+|SYMX|SymmetryX_plus, SymmetryX_minus|
+|SYMY|SymmetryY_plus, SymmetryY_minus|
 
 ### [Solved fields](Fields)
 

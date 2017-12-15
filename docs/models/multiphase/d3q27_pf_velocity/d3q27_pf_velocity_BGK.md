@@ -1,12 +1,12 @@
 
 
 ## Description
-d3q27_pf_velocity
+d3q27_pf_velocity_BGK
 
 ## Details
 [Model description files](Model description) files for this model:
-[Dynamics.c](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d3q27_pf_velocity/Dynamics.c.Rt)
-[Dynamics.R](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d3q27_pf_velocity/Dynamics.R)
+[Dynamics.c](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d3q27_pf_velocity_BGK/Dynamics.c.Rt)
+[Dynamics.R](https://github.com/llaniewski/TCLB/blob/(HEAD detached at 71dd0de)/src/d3q27_pf_velocity_BGK/Dynamics.R)
 
 ### [Zonal Settings](Settings)
 
